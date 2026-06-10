@@ -474,7 +474,6 @@ apps/admin-x-settings/test/unit/utils/show-database-warning.test.ts
 apps/admin-x-settings/test/unit/utils/bluesky-urls.test.ts
 apps/admin-x-settings/test/unit/utils/twitter-urls.test.ts
 apps/admin-x-settings/test/unit/utils/analytics.test.ts
-apps/admin-x-settings/test/unit/utils/post-analytics-export-filename.test.ts
 apps/admin-x-settings/test/unit/utils/theme-editor-utils.test.ts
 apps/admin-x-settings/test/unit/utils/welcome-email-sender-details.test.ts
 apps/admin-x-settings/test/unit/utils/platform-config.test.ts
@@ -1962,11 +1961,10 @@ apps/posts/src/views/Automations/automations.tsx
 apps/posts/src/views/Automations/utils/newsletter-emails.ts
 apps/posts/src/views/Automations/utils/default-welcome-email-values.ts
 apps/posts/src/views/Automations/utils/welcome-email-sender-details.ts
+apps/posts/src/views/Automations/utils.ts
 apps/posts/src/views/Automations/hooks/use-welcome-email-sender-details.ts
 apps/posts/src/views/Automations/types.ts
 apps/posts/src/views/Automations/components/automation-email-design-modal.tsx
-apps/posts/src/views/Automations/components/add-step-edge.tsx
-apps/posts/src/views/Automations/components/automation-canvas.tsx
 apps/posts/src/views/Automations/components/automations-list.tsx
 apps/posts/src/views/Automations/components/email-modal/email-content-modal.tsx
 apps/posts/src/views/Automations/components/email-modal/sender-details.ts
@@ -1980,8 +1978,14 @@ apps/posts/src/views/Automations/components/email-modal/koenig-lexical.d.ts
 apps/posts/src/views/Automations/components/email-modal/preview-frame.tsx
 apps/posts/src/views/Automations/components/email-modal/use-email-preview.ts
 apps/posts/src/views/Automations/components/email-design-button.tsx
-apps/posts/src/views/Automations/components/step-picker.tsx
 apps/posts/src/views/Automations/components/automation-status-badge.tsx
+apps/posts/src/views/Automations/components/canvas/step-sidebar.tsx
+apps/posts/src/views/Automations/components/canvas/add-step-edge.tsx
+apps/posts/src/views/Automations/components/canvas/automation-canvas.tsx
+apps/posts/src/views/Automations/components/canvas/controls.tsx
+apps/posts/src/views/Automations/components/canvas/format-wait.ts
+apps/posts/src/views/Automations/components/canvas/step-picker.tsx
+apps/posts/src/views/Automations/components/canvas/nodes.tsx
 apps/posts/src/views/Automations/components/types.ts
 apps/posts/src/views/Automations/components/email-design/email-preview.tsx
 apps/posts/src/views/Automations/components/email-design/dirty-confirm-modal.tsx
@@ -3557,7 +3561,6 @@ ghost/admin/mirage/scenarios/default.js
 ghost/admin/mirage/routes-dev.js
 ghost/admin/mirage/routes-test.js
 ghost/admin/mirage/fixtures/newsletters.js
-ghost/admin/mirage/fixtures/timezones.js
 ghost/admin/mirage/fixtures/sites.js
 ghost/admin/mirage/fixtures/themes.js
 ghost/admin/mirage/fixtures/tiers.js
@@ -4394,6 +4397,7 @@ ghost/core/test/e2e-api/members/__snapshots__/feedback.test.js.snap
 ghost/core/test/e2e-api/members/__snapshots__/site.test.js.snap
 ghost/core/test/e2e-api/members/feedback.test.js
 ghost/core/test/e2e-api/members/site.test.js
+ghost/core/test/e2e-api/members/automations.test.js
 ghost/core/test/e2e-api/members/signin.test.js
 ghost/core/test/e2e-api/members/send-magic-link.test.js
 ghost/core/test/e2e-api/members/donation-checkout-session.test.js
@@ -4403,6 +4407,7 @@ ghost/core/test/e2e-api/members/gift-subscriptions.test.js
 ghost/core/test/unit/api/endpoints/members.test.js
 ghost/core/test/unit/api/endpoints/db.test.js
 ghost/core/test/unit/api/endpoints/utils/serializers/input/utils/slug-filter-order.test.js
+ghost/core/test/unit/api/endpoints/utils/csv-export-filename.test.js
 ghost/core/test/unit/api/endpoints/automations.test.js
 ghost/core/test/unit/api/endpoints/gift-reminders.test.js
 ghost/core/test/unit/api/endpoints/previews.test.js
@@ -4412,6 +4417,7 @@ ghost/core/test/unit/api/canary/utils/serializers/output/posts-export-csv.test.t
 ghost/core/test/unit/api/canary/utils/serializers/output/pages.test.js
 ghost/core/test/unit/api/canary/utils/serializers/output/posts.test.js
 ghost/core/test/unit/api/canary/utils/serializers/output/default.test.js
+ghost/core/test/unit/api/canary/utils/serializers/output/members-export-csv.test.ts
 ghost/core/test/unit/api/canary/utils/serializers/output/mapper.test.js
 ghost/core/test/unit/api/canary/utils/serializers/output/utils/url.test.js
 ghost/core/test/unit/api/canary/utils/serializers/output/utils/preview-rendering.test.js
@@ -4478,6 +4484,7 @@ ghost/core/test/unit/server/notify.test.js
 ghost/core/test/unit/server/lib/package-json/parse.test.js
 ghost/core/test/unit/server/lib/package-json/read.test.js
 ghost/core/test/unit/server/lib/package-json/filter.test.js
+ghost/core/test/unit/server/lib/bootstrap-socket.test.ts
 ghost/core/test/unit/server/lib/post-revisions.test.ts
 ghost/core/test/unit/server/lib/get-inbox-links.test.ts
 ghost/core/test/unit/server/lib/common/to-plain.test.js
@@ -4486,7 +4493,6 @@ ghost/core/test/unit/server/lib/request-external.test.js
 ghost/core/test/unit/server/lib/lexical.test.js
 ghost/core/test/unit/server/lib/events.test.js
 ghost/core/test/unit/server/lib/mobiledoc.test.js
-ghost/core/test/unit/server/lib/bootstrap-socket.test.js
 ghost/core/test/unit/server/lib/image/gravatar.test.js
 ghost/core/test/unit/server/lib/image/image-utils.test.js
 ghost/core/test/unit/server/lib/image/blog-icon.test.js
@@ -4523,6 +4529,7 @@ ghost/core/test/unit/server/services/mentions/resource-service.test.js
 ghost/core/test/unit/server/services/mentions/mention-discovery-service.test.js
 ghost/core/test/unit/server/services/mentions/utils/index.js
 ghost/core/test/unit/server/services/mentions/routing-service.test.js
+ghost/core/test/unit/server/services/mentions/webmention-metadata.test.js
 ghost/core/test/unit/server/services/mentions/mentions-api.test.js
 ghost/core/test/unit/server/services/recommendations/service/recommendation.test.ts
 ghost/core/test/unit/server/services/recommendations/service/bookshelf-repository.test.ts
@@ -4581,6 +4588,7 @@ ghost/core/test/unit/server/services/explore-ping/explore-ping-service.test.js
 ghost/core/test/unit/server/services/automations/automations-api.test.js
 ghost/core/test/unit/server/services/automations/automations-repository.test.ts
 ghost/core/test/unit/server/services/automations/service.test.js
+ghost/core/test/unit/server/services/automations/poll.test.ts
 ghost/core/test/unit/server/services/stats/members.test.js
 ghost/core/test/unit/server/services/stats/posts.test.js
 ghost/core/test/unit/server/services/stats/stats.test.js
@@ -4695,14 +4703,14 @@ ghost/core/test/unit/server/services/koenig/node-renderers/header-v1-renderer.te
 ghost/core/test/unit/server/services/koenig/node-renderers/email-cta-renderer.test.js
 ghost/core/test/unit/server/services/koenig/node-renderers/toggle-renderer.test.js
 ghost/core/test/unit/server/services/koenig/node-renderers.test.js
-ghost/core/test/unit/server/services/koenig/test-utils/build-call-renderer.js
-ghost/core/test/unit/server/services/koenig/test-utils/assert-prettified-includes.js
-ghost/core/test/unit/server/services/koenig/test-utils/prettify-html.js
-ghost/core/test/unit/server/services/koenig/test-utils/visibility.js
-ghost/core/test/unit/server/services/koenig/test-utils/html.js
-ghost/core/test/unit/server/services/koenig/test-utils/assert-prettified-includes.test.js
-ghost/core/test/unit/server/services/koenig/test-utils/index.js
-ghost/core/test/unit/server/services/koenig/test-utils/assert-prettifies-to.js
+ghost/core/test/unit/server/services/koenig/test-utils/index.ts
+ghost/core/test/unit/server/services/koenig/test-utils/html.ts
+ghost/core/test/unit/server/services/koenig/test-utils/assert-prettifies-to.ts
+ghost/core/test/unit/server/services/koenig/test-utils/prettify-html.ts
+ghost/core/test/unit/server/services/koenig/test-utils/visibility.ts
+ghost/core/test/unit/server/services/koenig/test-utils/build-call-renderer.ts
+ghost/core/test/unit/server/services/koenig/test-utils/assert-prettified-includes.test.ts
+ghost/core/test/unit/server/services/koenig/test-utils/assert-prettified-includes.ts
 ghost/core/test/unit/server/services/koenig/render-utils/stylex.test.js
 ghost/core/test/unit/server/services/koenig/render-utils/tagged-template-fns.test.js
 ghost/core/test/unit/server/services/koenig/render-utils/is-content-image.test.js
@@ -4762,6 +4770,7 @@ ghost/core/test/unit/server/services/members/members-api/services/members-bread-
 ghost/core/test/unit/server/services/members/members-api/services/geolocation-service.test.js
 ghost/core/test/unit/server/services/members/members-api/services/payments-service.test.js
 ghost/core/test/unit/server/services/members/middleware.test.js
+ghost/core/test/unit/server/services/members/clean-expired-comped.test.js
 ghost/core/test/unit/server/services/members/utils.test.js
 ghost/core/test/unit/server/services/members/single-use-token-provider.test.js
 ghost/core/test/unit/server/services/members/config.test.js
@@ -5174,6 +5183,7 @@ ghost/core/core/server/api/endpoints/utils/serializers/output/all.js
 ghost/core/core/server/api/endpoints/utils/serializers/output/session.js
 ghost/core/core/server/api/endpoints/utils/serializers/output/email-posts.js
 ghost/core/core/server/api/endpoints/utils/serializers/output/posts-csv-transform.ts
+ghost/core/core/server/api/endpoints/utils/serializers/output/stream-csv-response.ts
 ghost/core/core/server/api/endpoints/utils/serializers/output/themes.js
 ghost/core/core/server/api/endpoints/utils/serializers/output/default.js
 ghost/core/core/server/api/endpoints/utils/serializers/output/utils/post-gating.js
@@ -5252,6 +5262,7 @@ ghost/core/core/server/api/endpoints/utils/serializers/input/comments.js
 ghost/core/core/server/api/endpoints/utils/serializers/input/settings.js
 ghost/core/core/server/api/endpoints/utils/serializers/input/emails.js
 ghost/core/core/server/api/endpoints/utils/serializers/index.js
+ghost/core/core/server/api/endpoints/utils/csv-export-filename.js
 ghost/core/core/server/api/endpoints/utils/validators/utils/json-schema.js
 ghost/core/core/server/api/endpoints/utils/validators/output/index.js
 ghost/core/core/server/api/endpoints/utils/validators/input/setup.js
@@ -5333,7 +5344,6 @@ ghost/core/core/server/lib/get-inbox-links.ts
 ghost/core/core/server/lib/package-json/parse.js
 ghost/core/core/server/lib/package-json/index.js
 ghost/core/core/server/lib/package-json/package-json.js
-ghost/core/core/server/lib/bootstrap-socket.js
 ghost/core/core/server/lib/validate-password.js
 ghost/core/core/server/lib/common/events.js
 ghost/core/core/server/lib/common/to-plain.ts
@@ -5348,6 +5358,7 @@ ghost/core/core/server/lib/image/image-size.js
 ghost/core/core/server/lib/image/gravatar.js
 ghost/core/core/server/lib/image/index.js
 ghost/core/core/server/lib/request-external.js
+ghost/core/core/server/lib/bootstrap-socket.ts
 ghost/core/core/server/services/verification/verification-webhook-service.ts
 ghost/core/core/server/services/internal-keys/index.ts
 ghost/core/core/server/services/link-redirection/redirect-event.js
@@ -5499,6 +5510,7 @@ ghost/core/core/server/services/verification-trigger.js
 ghost/core/core/server/services/automations/automations-api.ts
 ghost/core/core/server/services/automations/service.js
 ghost/core/core/server/services/automations/poll.ts
+ghost/core/core/server/services/automations/constants.ts
 ghost/core/core/server/services/automations/temporary-fake-database.ts
 ghost/core/core/server/services/automations/index.js
 ghost/core/core/server/services/automations/automations-repository.ts
@@ -6204,6 +6216,7 @@ ghost/core/core/server/data/migrations/versions/6.29/2026-04-13-09-12-13-drop-gi
 ghost/core/core/server/data/migrations/versions/6.18/2026-02-04-10-42-20-offers-nullable-product-id.js
 ghost/core/core/server/data/migrations/versions/5.102/2024-12-02-17-32-40-alter-length-redirects-from.js
 ghost/core/core/server/data/migrations/versions/5.102/2024-12-02-17-48-40-add-index-redirects-from.js
+ghost/core/core/server/data/migrations/versions/6.45/2026-06-08-11-23-46-add-revalidation-failure-count-to-mentions.js
 ghost/core/core/server/data/migrations/versions/5.29/2023-01-11-02-45-truncate-suppressions.js
 ghost/core/core/server/data/migrations/versions/5.115/2025-03-24-07-19-27-add-identity-read-permission-to-administrators.js
 ghost/core/core/server/data/migrations/versions/5.3/2022-07-05-10-00-add-comment-related-fields-to-members.js
@@ -6316,9 +6329,9 @@ ghost/core/core/server/data/seeders/importers/posts-tags-importer.js
 ghost/core/core/server/data/seeders/importers/roles-users-importer.js
 ghost/core/core/server/data/seeders/utils/blog-info.js
 ghost/core/core/server/data/seeders/utils/random.js
+ghost/core/core/server/data/seeders/utils/topological-sort.ts
 ghost/core/core/server/data/seeders/utils/event-generator.js
 ghost/core/core/server/data/seeders/utils/json-importer.js
-ghost/core/core/server/data/seeders/utils/topological-sort.js
 ghost/core/core/server/data/seeders/utils/database-date.js
 ghost/core/core/server/data/seeders/data-generator.js
 ghost/core/core/server/data/importer/importers/importer-revue.js
@@ -6560,6 +6573,7 @@ ghost/core/core/frontend/services/rss/cache.js
 ghost/core/core/frontend/services/rss/index.js
 ghost/core/core/frontend/services/handlebars.js
 ghost/core/core/frontend/services/helpers/registry.js
+ghost/core/core/frontend/services/helpers/register-ghost-helpers.js
 ghost/core/core/frontend/services/helpers/index.js
 ghost/core/core/frontend/services/helpers/handlebars.js
 ghost/core/core/frontend/views/unsubscribe.hbs
